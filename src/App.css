@@ -39,3 +39,5 @@ p {
     transform: rotate(360deg);
   }
 }
+
+.rowC{display:flex; flex-direction:row;}

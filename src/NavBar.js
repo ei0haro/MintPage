@@ -23,18 +23,16 @@ function NavBar({walletAddress, handleConnectWallet, isConnected}) {
                 <Container>
 
                     <Navbar.Brand href="#home">
-                        Check your address total worth...
+                        On Chain Talking Pepe
                     </Navbar.Brand>
                     {isConnected ? <Nav>
-                        <Container className="justify-content-center">
-               
+                        <Container className="justify-content-center">               
                         </Container>
                         </Nav>
                         : ""
                     }
                     <DarkButton size={'lg'} onClickFunction={handleConnectWallet} disableIf={false}
                                 text={setConnectButtonText(walletAddress)}></DarkButton>
-
 
                 </Container>
             </Navbar>

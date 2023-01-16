@@ -1,7 +1,7 @@
 
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3('https://eth-mainnet.g.alchemy.com/v2/' + process.env.REACT_APP_ALCHEMY_KEY);
-
+const contractABI = require('../../abi/contractAbi.json')
 
 export const connectWallet = async () => {
 

@@ -4,21 +4,39 @@ import "./SpeechBubble.css";
 import DarkButton from "./interact/button/button";
 import {Form, Button} from "react-bootstrap";
 
-function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, handleCheckAvailability, handleMint, isLoading}) {
+function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, isValidText2, setIsValidText2,
+     handleCheckAvailability, handleMint, isLoading, setTextInput1, setTextInput2,
+    inputErrorMessage, setInputErrorMessage}) {
 
     function handleInputChange1(e) {
-        setValidated(false);
-      /*  let textInput = e.target.value
+        let text = e.target.value
 
-        if(textInput.length === 0){
+        if(text.endsWith(' ') || text.startsWith(' ')){
             setValidated(true);
             setIsValidText1(false);
+            setInputErrorMessage("Cannot start or end with white space");
         }
-        */
+        else{
+            setValidated(false);
+        }
+
+        setTextInput1(text);
     }
 
     function handleInputChange2(e) {
-        setValidated(false);
+
+        let text = e.target.value
+
+        if(text.endsWith(' ') || text.startsWith(' ')){
+            setValidated(true);
+            setIsValidText2(false);
+            setInputErrorMessage("Cannot start or end with white space");
+        }
+        else{
+            setValidated(false);
+        }
+
+        setTextInput2(text);
     }
 
 
@@ -39,18 +57,19 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, h
                                         type="text"
                                         maxLength={10}                                        
                                         {...(isValidText1 && validated ? {className:"is-valid"} : {})}
-                                        {...(!isValidText1 && validated ? {className:"is-invalid"} : {})}       
-                                                          
-                                    />
-                                    <Form.Control.Feedback type="invalid">Please provide between 1 - 10 characters.</Form.Control.Feedback>
+                                        {...(!isValidText1 && validated ? {className:"is-invalid"} : {})}                                                          
+                                    />                                    
                                     <Form.Label></Form.Label>
                                     <Form.Control
                                         size="sm"                                
                                         placeholder="Text2"                                        
                                         type="text"
                                         maxLength={10}
-                                        onChange={handleInputChange2}                                        
+                                        onChange={handleInputChange2}
+                                        {...(isValidText2 && validated ? {className:"is-valid"} : {})}
+                                        {...(!isValidText2 && validated ? {className:"is-invalid"} : {})}                                          
                                     />
+                                    <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
                                 </Form.Group>
                                 <div className='rowC'>
                                 <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Loading…' : 'Check availability'}></DarkButton>

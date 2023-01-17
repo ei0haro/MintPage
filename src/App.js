@@ -20,38 +20,38 @@ function App() {
     const [errorMessage, setErrorMessage] = useState("");
     const [validated, setValidated] = useState(false);
     const [isValidText1, setIsValidText1] = useState(false);
+    const [isValidText2, setIsValidText2] = useState(false);
+    const [inputErrorMessage, setInputErrorMessage] = useState("");
+    const [textInput1, setTextInput1] = useState("");
+    const [textInput2, setTextInput2] = useState("");
 
     const [modalShow, setModalShow] = useState(false);
 
-    const handleCheckAvailability = (event) => {
-     
-    //    let form = event.currentTarget
-        //if (form.checkValidity() === false) {
-       //   event.preventDefault();
-       //  event.stopPropagation();
-       
-     //   }
+    const handleCheckAvailability = () => {
 
-        //Call method and check if available
-    
-        setValidated(true);
-        setIsValidText1(true);
+        let text1Good = false;
+        let text2Good = false;
+
+        ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
+
+        if(text1Good && text2Good){
+            //Check avail
+        }
     };
 
-    const handleMint = (event) => {
-     
-        //Check if text1 is length over 0. 
-        //Then mint
+    const handleMint = () => {
 
-      //  let form = event.currentTarget
-      //  if (form.checkValidity() === false) {
-       //   event.preventDefault();
-       //  event.stopPropagation();
+        let text1Good = false;
+        let text2Good = false;
+
+        ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
+
+        if(text1Good && text2Good){
+            //MINT
+        }
+
+
        
-    //    }
-    
-        setValidated(true);
-        setIsValidText1(true);
     };
 
     const handleConnectWallet = () => {
@@ -98,12 +98,50 @@ function App() {
 
             <div className='rowC'>
                 <Image width={1000} height={1000}  fluid alt='...' src={pepe} />
-                <SpeechBubble validated={validated} setValidated={setValidated} isValidText1={isValidText1} setIsValidText1={setIsValidText1} handleCheckAvailability={handleCheckAvailability} isLoading={isLoading} handleMint={handleMint}></SpeechBubble>
+                <SpeechBubble validated={validated}
+                    setValidated={setValidated}
+                    isValidText1={isValidText1}
+                    setIsValidText1={setIsValidText1}
+                    isValidText2={isValidText2}
+                    setIsValidText2={setIsValidText2}
+                    handleCheckAvailability={handleCheckAvailability}
+                    isLoading={isLoading}
+                    handleMint={handleMint}
+                    setTextInput1={setTextInput1}
+                    setTextInput2={setTextInput2}
+                    inputErrorMessage={inputErrorMessage}
+                    setInputErrorMessage={setInputErrorMessage}
+                ></SpeechBubble>
             </div>
 
         </div>
 
     );
+
+    function validateInputs(text1Good, text2Good) {
+        setValidated(true);
+        if (textInput1 === "") {
+            setIsValidText1(false);
+            setInputErrorMessage("Text1 cannot be empty");
+        }
+        else if (textInput1.endsWith(' ') || textInput1.startsWith(' ')) {
+            setIsValidText1(false);
+            setInputErrorMessage("Text starts or ends with space");
+        }
+        else {
+            text1Good = true;
+            setIsValidText1(true);
+        }
+        if (textInput2 !== "" && (textInput2.endsWith(' ') || textInput2.startsWith(' '))) {
+            setIsValidText2(false);
+            setInputErrorMessage("Text starts or ends with space");
+        }
+        else {
+            text2Good = true;
+            setIsValidText2(true);
+        }
+        return { text1Good, text2Good };
+    }
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, {useEffect, useState} from "react";
-import {connectWallet} from "./interact/wallet/wallet";
+import {connectWallet, checkAvailability, mintNFT, getMintPrice} from "./interact/wallet/wallet";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import DarkButton from "./interact/button/button";
@@ -35,7 +35,11 @@ function App() {
         ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
 
         if(text1Good && text2Good){
-            //Check avail
+            checkAvailability(textInput1, textInput2).then((response) => {
+                console.log(`Received response: ${response}`);
+              });
+
+      
         }
     };
 
@@ -47,7 +51,18 @@ function App() {
         ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
 
         if(text1Good && text2Good){
-            //MINT
+
+            getMintPrice().then((mintPrice) => {
+                console.log(Number(mintPrice)/1000)
+
+                mintNFT(textInput1, textInput2, (Number(mintPrice)/1000).toString()).then((txHash) => {
+                    console.log(`TxHash: ${txHash}`);
+
+                });
+                
+              });
+
+            
         }
 
 

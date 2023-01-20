@@ -17,6 +17,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
             setInputErrorMessage("Cannot start or end with white space");
         }
         else{
+            setIsValidText1(true);
             setValidated(false);
         }
 
@@ -33,6 +34,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
             setInputErrorMessage("Cannot start or end with white space");
         }
         else{
+            setIsValidText2(true);
             setValidated(false);
         }
 

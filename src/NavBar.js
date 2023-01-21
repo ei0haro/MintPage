@@ -2,8 +2,10 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import DarkButton from "./interact/button/button";
 import React from "react";
-import {Nav} from "react-bootstrap";
+import {Nav, Image} from "react-bootstrap";
 import "./interact/button/button.css";
+import etherscanImage from './images/Etherscan.svg';
+import openseaImage from './images/opensea.png';
 
 function NavBar({walletAddress, handleConnectWallet, isConnected}) {
 
@@ -21,10 +23,14 @@ function NavBar({walletAddress, handleConnectWallet, isConnected}) {
         <div>
             <Navbar bg="dark" variant="dark">
                 <Container>
-
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand>
+                    <a href={"https://etherscan.io/token/" + process.env.REACT_APP_NFT_CONTRACT}><Image width={30} height={30} thumbnail={true} src={etherscanImage}></Image></a>
+                    <a href={"https://opensea.io/" + process.env.REACT_APP_NFT_CONTRACT}> <Image width={30} height={30} thumbnail={true} src={openseaImage}></Image></a>
+                    {' '}
                         On Chain Talking Pepe
                     </Navbar.Brand>
+                    
+                    
                     {isConnected ? <Nav>
                         <Container className="justify-content-center">               
                         </Container>

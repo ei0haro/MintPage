@@ -12,6 +12,7 @@ import DonateCard from "./DonateCard";
 import Image from 'react-bootstrap/Image'
 import pepe from './images/pepe.svg';
 import SpeechBubble from './SpeechBubble';
+import {Alert} from "react-bootstrap";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
@@ -24,8 +25,8 @@ function App() {
     const [inputErrorMessage, setInputErrorMessage] = useState("");
     const [textInput1, setTextInput1] = useState("");
     const [textInput2, setTextInput2] = useState("");
+    const [txHash, setTxHash] = useState("");
 
-    const [modalShow, setModalShow] = useState(false);
 
     const handleCheckAvailability = () => {
 
@@ -35,38 +36,31 @@ function App() {
         ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
 
         if(text1Good && text2Good){
-            checkAvailability(textInput1, textInput2).then((response) => {
-                console.log(`Received response: ${response}`);
-              });
+            checkAvailability(textInput1, textInput2).then((isAvailable) => {                
 
-      
+                if(isAvailable){
+                    setIsValidText1(false);
+                    setIsValidText2(false);
+                    setInputErrorMessage("Text combination already taken");
+                }
+
+                return isAvailable;
+              });      
         }
+
+        return true;
     };
 
     const handleMint = () => {
 
-        let text1Good = false;
-        let text2Good = false;
-
-        ({ text1Good, text2Good } = validateInputs(text1Good, text2Good));
-
-        if(text1Good && text2Good){
+        let isAvailable = handleCheckAvailability();
+        console.log(`Received response: ${isAvailable}`);
+        if(isAvailable){
 
             getMintPrice().then((mintPrice) => {
-                console.log(Number(mintPrice)/1000)
-
-                mintNFT(textInput1, textInput2, (Number(mintPrice)/1000).toString()).then((txHash) => {
-                    console.log(`TxHash: ${txHash}`);
-
-                });
-                
-              });
-
-            
+                mintNFT(textInput1, textInput2, (Number(mintPrice)).toString(), setTxHash, setIsLoading)      
+            });
         }
-
-
-       
     };
 
     const handleConnectWallet = () => {
@@ -128,7 +122,10 @@ function App() {
                     setInputErrorMessage={setInputErrorMessage}
                 ></SpeechBubble>
             </div>
-
+          
+            {txHash !== "" &&  <Alert variant='dark' onClose={() => setTxHash("")} dismissible>
+                Minted - txHash: <a href={'https://etherscan.io/tx/' + txHash} >{txHash}</a>
+                </Alert>}            
         </div>
 
     );

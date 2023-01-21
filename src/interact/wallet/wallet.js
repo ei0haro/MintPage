@@ -55,28 +55,43 @@ export const getNumberOfMintedNfts = async () => {
     return await window.contract.methods.exists(text1, text2).call()
   }
   
-  export const mintNFT = async (text1, text2, mintPrice) => {
+  export const mintNFT = async (text1, text2, mintPrice, setTxHash, setIsLoading) => {
   
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);  
 
-    const transactionParameters = {
-      value: mintPrice,
-      to: process.env.REACT_APP_NFT_CONTRACT, // Required except during contract publications.
-      from: window.ethereum.selectedAddress, // must match user's active address.
-      data: window.contract.methods
-          .mint(text1, text2)
-        .encodeABI(),
-    };
-  
-    try {
-      const txHash = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [transactionParameters],
-      });
-      return txHash;
-    } catch (error) {
-      return '';
-    }
+    console.log(ethers.utils.parseEther("0.05").toString())
+
+    try{
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+        provider.getSigner().sendTransaction({
+          value: mintPrice,
+          to: process.env.REACT_APP_NFT_CONTRACT, // Required except during contract publications.
+          from: window.ethereum.selectedAddress, // must match user's active address.
+          data: window.contract.methods
+              .mint(text1, text2)
+            .encodeABI(),
+        }).then((txHash) => {
+          setTxHash(txHash.hash);
+
+
+      /*  const interval = setInterval(function() {
+          console.log("Attempting to get transaction receipt...");
+          web3.eth.getTransactionReceipt(txHash.hash, function(err, rec) {
+            if (rec) {
+              console.log(rec);
+              clearInterval(interval);
+            }
+          });
+        })
+*/
+        })
+      }
+      catch (error) {
+        return 'Something went wrong' + error;
+      }
   };
+
+
   
 

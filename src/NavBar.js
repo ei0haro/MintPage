@@ -25,7 +25,8 @@ function NavBar({walletAddress, handleConnectWallet, isConnected}) {
                 <Container>
                     <Navbar.Brand>
                     <a href={"https://etherscan.io/token/" + process.env.REACT_APP_NFT_CONTRACT}><Image width={30} height={30} thumbnail={true} src={etherscanImage}></Image></a>
-                    <a href={"https://opensea.io/" + process.env.REACT_APP_NFT_CONTRACT}> <Image width={30} height={30} thumbnail={true} src={openseaImage}></Image></a>
+                    {' '}
+                    <a href={"https://opensea.io/" + process.env.REACT_APP_NFT_CONTRACT}><Image width={30} height={30} thumbnail={true} src={openseaImage}></Image></a>
                     {' '}
                         On Chain Talking Pepe
                     </Navbar.Brand>

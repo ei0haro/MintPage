@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const { ethers } = require("ethers");
-console.log("SDDS"+process.env.REACT_APP_RPC)
 const web3 = createAlchemyWeb3(process.env.REACT_APP_RPC);
 const contractABI = require('../../abi/contractAbi.json')
 //import {ethers} from "ethers";
@@ -10,7 +9,7 @@ export const connectWallet = async () => {
 
     const chainId = process.env.REACT_APP_CHAIN_ID;
 
-   /* if (window.ethereum.networkVersion !== chainId) {
+    if (window.ethereum.networkVersion !== chainId) {
         try {
             await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
@@ -21,7 +20,7 @@ export const connectWallet = async () => {
         }
 
 
-    } */
+    }
 
     try {
       const addressArray = await window.ethereum.request({
@@ -36,11 +35,6 @@ export const connectWallet = async () => {
 export const getNumberOfMintedNfts = async () => {
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
     return await window.contract.methods.getNumberOfMintedNfts().call()
-  }
-  
-  export const getmaxSupply = async () => {
-    window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
-    return await window.contract.methods.getmaxSupply().call()
   }
 
   export const getMintPrice = async () => {
@@ -58,8 +52,6 @@ export const getNumberOfMintedNfts = async () => {
   export const mintNFT = async (text1, text2, mintPrice, setTxHash, setIsLoading) => {
   
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);  
-
-    console.log(ethers.utils.parseEther("0.05").toString())
 
     try{
         const provider = new ethers.providers.Web3Provider(window.ethereum, "any");

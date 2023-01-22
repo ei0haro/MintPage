@@ -1,6 +1,7 @@
 
 import React from "react";
 import "./SpeechBubble.css";
+import "./DonateCard.css";
 import DarkButton from "./interact/button/button";
 import {Form, Button} from "react-bootstrap";
 
@@ -43,10 +44,10 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
 
 
     return (
-        <div class="box">
-            <div class="center">
-                <div class="dialog-1">
-                    <div class="form-dialog">
+        <div className="box">
+            <div className="center">
+                <div className="dialog-1">
+                    <div className="form-dialog">
                         
                         <Form >
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -63,7 +64,8 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                     />                                    
                                     <Form.Label></Form.Label>
                                     <Form.Control
-                                        size="sm"                                
+                                        size="sm"    
+                                        variant="dark"                            
                                         placeholder="Text2"                                        
                                         type="text"
                                         maxLength={10}
@@ -79,7 +81,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                 </div>
                             </Form>
                     </div>
-                    <div class="left-point"></div>                
+                    <div className="left-point"></div>                
                 </div>
         
             </div>		

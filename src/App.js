@@ -1,14 +1,11 @@
 import './App.css';
 
 import React, {useEffect, useState} from "react";
-import {connectWallet, checkAvailability, mintNFT, getMintPrice} from "./interact/wallet/wallet";
+import {connectWallet, checkAvailability, mintNFT, getMintPrice, getNumberOfMintedNfts} from "./interact/wallet/wallet";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
-import DarkButton from "./interact/button/button";
-import Cookies from 'universal-cookie';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import DonateCard from "./DonateCard";
 import Image from 'react-bootstrap/Image'
 import pepe from './images/pepe.svg';
 import SpeechBubble from './SpeechBubble';
@@ -26,7 +23,21 @@ function App() {
     const [textInput1, setTextInput1] = useState("");
     const [textInput2, setTextInput2] = useState("");
     const [txHash, setTxHash] = useState("");
+    const [nrOfMintedNfts, setNrOfMintedNfts] = useState(0);
 
+    const MINUTE_MS = 10000;
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+
+        getNumberOfMintedNfts().then((nrOfNfts) => {
+            setNrOfMintedNfts(nrOfNfts);
+        });
+        
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval); 
+    }, [])
 
     const handleCheckAvailability = () => {
 
@@ -53,8 +64,7 @@ function App() {
 
     const handleMint = () => {
 
-        let isAvailable = handleCheckAvailability();
-        console.log(`Received response: ${isAvailable}`);
+        let isAvailable = handleCheckAvailability();        
         if(isAvailable){
 
             getMintPrice().then((mintPrice) => {
@@ -106,7 +116,11 @@ function App() {
 
 
             <div className='rowC'>
-                <Image width={1000} height={1000}  fluid alt='...' src={pepe} />
+                <div>
+                    <Image width={700} height={700}  fluid alt='...' src={pepe} />
+                    <p className='mintedText'>Total minted: {nrOfMintedNfts}</p>
+                </div>
+                
                 <SpeechBubble validated={validated}
                     setValidated={setValidated}
                     isValidText1={isValidText1}

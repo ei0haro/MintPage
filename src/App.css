@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -40,7 +41,16 @@ p {
   }
 }
 
-.rowC{display:flex; flex-direction:row;}
+.rowC
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto; max-width: 1280px; min-width: 700px;
+  grid-column-gap: 50px;
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
 .mintedText{
   font-size: 2.875em;

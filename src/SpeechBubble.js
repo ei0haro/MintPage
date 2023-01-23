@@ -3,7 +3,7 @@ import React from "react";
 import "./SpeechBubble.css";
 import "./DonateCard.css";
 import DarkButton from "./interact/button/button";
-import {Form, Button} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 
 function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, isValidText2, setIsValidText2,
      handleCheckAvailability, handleMint, isLoading, setTextInput1, setTextInput2,
@@ -45,9 +45,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
 
     return (
         <div className="box">
-            <div className="center">
-                <div className="dialog-1">
-                    <div className="form-dialog">
+
                         
                         <Form >
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -80,11 +78,9 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                 <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Loading…' : 'Mint'}></DarkButton>
                                 </div>
                             </Form>
-                    </div>
-                    <div className="left-point"></div>                
-                </div>
-        
-            </div>		
+
+
+
 	    </div>
     );
 }

@@ -9,13 +9,11 @@
   }
   
   .box{
-      width: 60vh;
-      height: 50vh;
+
       /* border: solid black; */
-      margin: auto;
-      position: relative;
-      display: block;      
-      left: 150px;
+
+
+
   }
   
   .center{

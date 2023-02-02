@@ -24,6 +24,18 @@ function App() {
     const [textInput2, setTextInput2] = useState("");
     const [txHash, setTxHash] = useState("");
     const [nrOfMintedNfts, setNrOfMintedNfts] = useState(0);
+    const [mintPrice, setMintPrice] = useState(0);
+
+    useEffect(() => {
+
+        getNumberOfMintedNfts().then((nrOfNfts) => {
+            setNrOfMintedNfts(nrOfNfts);
+        });
+
+        getMintPrice().then((mintPrice) => {
+            setMintPrice((Number(mintPrice)).toString());
+        });
+    });
 
     const MINUTE_MS = 10000;
 
@@ -32,6 +44,10 @@ function App() {
 
         getNumberOfMintedNfts().then((nrOfNfts) => {
             setNrOfMintedNfts(nrOfNfts);
+        });
+
+        getMintPrice().then((mintPrice) => {
+            setMintPrice((Number(mintPrice)).toString());
         });
         
     }, MINUTE_MS);
@@ -134,6 +150,7 @@ function App() {
                     setTextInput2={setTextInput2}
                     inputErrorMessage={inputErrorMessage}
                     setInputErrorMessage={setInputErrorMessage}
+                    mintPrice={mintPrice}
                 ></SpeechBubble>
             </div>
           

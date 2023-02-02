@@ -64,19 +64,20 @@ export const getNumberOfMintedNfts = async () => {
               .mint(text1, text2)
             .encodeABI(),
         }).then((txHash) => {
-          setTxHash(txHash.hash);
+          
+          setIsLoading(true);
 
+          const interval = setInterval(function() {
+            
+            web3.eth.getTransactionReceipt(txHash.hash, function(err, rec) {
+              if (rec) {
+                setIsLoading(false);
+                setTxHash(txHash.hash);
+                clearInterval(interval);
+              }
+            });
+          }, 1000);
 
-      /*  const interval = setInterval(function() {
-          console.log("Attempting to get transaction receipt...");
-          web3.eth.getTransactionReceipt(txHash.hash, function(err, rec) {
-            if (rec) {
-              console.log(rec);
-              clearInterval(interval);
-            }
-          });
-        })
-*/
         })
       }
       catch (error) {

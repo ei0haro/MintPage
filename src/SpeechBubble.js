@@ -45,9 +45,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
 
 
     return (
-        <div className="box">
-
-                        
+        <div className="box">                        
                         <Form >
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label></Form.Label>
@@ -75,12 +73,10 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                     <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
                                 </Form.Group>
                                 <div className='rowC'>
-                                <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Loading…' : 'Check availability'}></DarkButton>
-                                <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Loading…' : `Mint (${ethers.utils.formatEther(mintPrice)} ETH)`}></DarkButton>
+                                <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Check availability'}></DarkButton>
+                                <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Minting…' : `Mint (${ethers.utils.formatEther(mintPrice)} ETH)`}></DarkButton>
                                 </div>
                             </Form>
-
-
 
 	    </div>
     );

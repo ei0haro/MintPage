@@ -48,3 +48,12 @@
       transform: rotate(60deg);
   }
   
+.mint-buttons
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto; max-width: 1280px; 
+  grid-column-gap: 50px;
+  padding-top: 30px;
+
+}

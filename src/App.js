@@ -5,9 +5,11 @@ import {connectWallet, checkAvailability, mintNFT, getMintPrice, getNumberOfMint
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
+import TextBubbleSvg from "./TextBubbleSvg"
 import Image from 'react-bootstrap/Image'
-import pepe from './images/pepe.svg';
+import pepe from './images/pepe-green.svg';
 import SpeechBubble from './SpeechBubble';
 import {Alert} from "react-bootstrap";
 
@@ -130,28 +132,37 @@ function App() {
                 </Navbar>
                 : ""}
 
-
             <div className='rowC'>
                 <div>
                     <Image width={700} height={700}  fluid alt='...' src={pepe} />
                     <p className='mintedText'>Total minted: {nrOfMintedNfts}</p>
                 </div>
-                
+                <div>
+                <Card style={{ width: '18rem' }} bg="black">
+                    <TextBubbleSvg text1={textInput1} text2={textInput2}></TextBubbleSvg>                    
+                    <Card.Body >           
+                    
+                    <Card.Text>
+                        This is how your provided text will look like in the minted NFT. If the text does not fit, please use small caps.
+                    </Card.Text>                    
+                    </Card.Body>
+                </Card>
+                </div>
                 <SpeechBubble validated={validated}
-                    setValidated={setValidated}
-                    isValidText1={isValidText1}
-                    setIsValidText1={setIsValidText1}
-                    isValidText2={isValidText2}
-                    setIsValidText2={setIsValidText2}
-                    handleCheckAvailability={handleCheckAvailability}
-                    isLoading={isLoading}
-                    handleMint={handleMint}
-                    setTextInput1={setTextInput1}
-                    setTextInput2={setTextInput2}
-                    inputErrorMessage={inputErrorMessage}
-                    setInputErrorMessage={setInputErrorMessage}
-                    mintPrice={mintPrice}
-                ></SpeechBubble>
+                        setValidated={setValidated}
+                        isValidText1={isValidText1}
+                        setIsValidText1={setIsValidText1}
+                        isValidText2={isValidText2}
+                        setIsValidText2={setIsValidText2}
+                        handleCheckAvailability={handleCheckAvailability}
+                        isLoading={isLoading}
+                        handleMint={handleMint}
+                        setTextInput1={setTextInput1}
+                        setTextInput2={setTextInput2}
+                        inputErrorMessage={inputErrorMessage}
+                        setInputErrorMessage={setInputErrorMessage}
+                        mintPrice={mintPrice}
+                    ></SpeechBubble>
             </div>
           
             {txHash !== "" &&  <Alert variant='dark' onClose={() => setTxHash("")} dismissible>

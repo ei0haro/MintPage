@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.7",
+    "@mapbox/svg-react-transformer": "^2.0.1",
     "@primer/react": "^35.14.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

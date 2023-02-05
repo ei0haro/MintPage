@@ -4,6 +4,7 @@ import "./SpeechBubble.css";
 import "./DonateCard.css";
 import DarkButton from "./interact/button/button";
 import {Form} from "react-bootstrap";
+import MoreInfo from './MoreInfo';
 import {ethers} from "ethers";
 
 function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, isValidText2, setIsValidText2,
@@ -72,9 +73,10 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                     />
                                     <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
                                 </Form.Group>
-                                <div className='rowC'>
+                                <div className='mint-buttons'>
                                 <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Check availability'}></DarkButton>
                                 <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Minting…' : `Mint (${ethers.utils.formatEther(mintPrice)} ETH)`}></DarkButton>
+                                <MoreInfo></MoreInfo>
                                 </div>
                             </Form>
 

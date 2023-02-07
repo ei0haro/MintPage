@@ -138,7 +138,7 @@ function App() {
                     <p className='mintedText'>Total minted: {nrOfMintedNfts}</p>
                 </div>
                 <div>
-                <Card style={{ width: '18rem' }} bg="black">
+                <Card style={{ width: '15rem' }} bg="black">
                     <TextBubbleSvg text1={textInput1} text2={textInput2}></TextBubbleSvg>                    
                     <Card.Body >           
                     

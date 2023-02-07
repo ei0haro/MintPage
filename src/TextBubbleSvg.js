@@ -4,20 +4,24 @@ import React from "react";
 class TextBubbleSvg extends React.PureComponent {
 
   render() {
+    
     return (
-      <svg {...this.props} viewBox="0 0 273.76502 185.097" version="1.1" id="svg32" width="273.76501" height="185.097"
-      xmlns="http://www.w3.org/2000/svg">
-      <defs id="defs36" />
-      <g stroke="#ffffff" id="g24" transform="translate(-463.53374,-5.0410085)">
-         <path
-            d="m 507.7,12.5 c 19,7.9 219,-20.5 213,20.8 v 67 c 0,11.5 -10,20.8 -27,20.8 H 539.8 l -36,52.3 c 22.2,-79.7 -9.4,-31 -18.9,-73 4.5,-19.9 -15,-90 23,-87.8 z"
-            strokeWidth="6.75" strokeMiterlimit="11" fill="none" id="path22" />
-      </g>
-      <text xmlSpace="preserve" textAnchor="middle" fontWeight="bold" fontFamily="'Yu Gothic UI'" fontSize="31px" fill="#ffffff" id="text30" x="80.379196" y="50.660461">
+      <svg viewBox="0 120 312.13879 236.9641" version="1.1" id="svg754"
+        xmlns="http://www.w3.org/2000/svg">
+        <defs id="defs758" />
+        <g stroke="#ffffff" id="g746" transform="translate(-514.52069,-33.425619)">
+            <g strokeMiterlimit="10" strokeWidth="2" id="g742">
+              <use href="#C" id="use738" />
+            </g>
+            <path strokeMiterlimit="11.3" strokeWidth="9"
+              d="m 548,163 c 24,11 282,-31 274,24 l -13,101 c -2,15 -102,24 -124,23 l -85,1 -62,63 c 29,-107 -2,-47 -14,-104 5,-26 -26,-111 24,-108 z"
+              fill="none" id="path744" />
+        </g>
+        <text xmlSpace="preserve" x="158.47931" y="189.57439" fontVariant="normal" fontFamily="Yu Gothic UI" textAnchor="middle" fontSize="37px" fontWeight="700" fill="#ffffff" id="text752">
          
-      {(this.props.text2 != "") ? <tspan x="140.38" y="50.66" id="tspan26">{this.props.text1}</tspan> : ""}
-      {(this.props.text2 != "") ? <tspan x="140.38" y="87.86" id="tspan28">{this.props.text2}</tspan> : ""}
-      {(this.props.text2 == "") ? <tspan x="140.38" y="69.26" id="tspan26">{this.props.text1}</tspan> : ""}
+      {(this.props.text2 !== "") ? <tspan x="155.38" y="189.66" id="tspan26">{this.props.text1}</tspan> : ""}
+      {(this.props.text2 !== "") ? <tspan x="155.38" y="236.86" id="tspan28">{this.props.text2}</tspan> : ""}
+      {(this.props.text2 === "") ? <tspan x="155.38" y="212.26" id="tspan26">{this.props.text1}</tspan> : ""}
        
       </text>
    </svg>

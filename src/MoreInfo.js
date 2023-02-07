@@ -17,7 +17,7 @@ function MoreInfo() {
       );
 
     return (
-        <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
+        <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
         <Button variant="dark"><img src={info} alt="my image"/></Button>        
         </OverlayTrigger>
     );

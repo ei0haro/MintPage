@@ -29,7 +29,7 @@
 }
 
 p {
-  color: #FFFFFF;
+  color: #FFFFFF;  
 }
 
 @keyframes App-logo-spin {
@@ -53,5 +53,5 @@ p {
 }
 
 .mintedText{
-  font-size: 2.875em;
+  font-size: 1.875em;
 }

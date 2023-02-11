@@ -8,13 +8,22 @@
       background-color: var(--main-background-color);
   }
   
-  .box{
+.form-control:not(active){
 
-      /* border: solid black; */
+    color: white;
+}
 
+.form-control:focus{
+    color: white;
+    background-color: #212529;
+}
 
+.form-control {
 
-  }
+    border-radius: 0;
+    background-color: #212529;
+
+}
   
   .center{
       padding-top: 50%;

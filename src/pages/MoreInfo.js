@@ -1,7 +1,7 @@
 
 import React from "react";
 import {Popover, OverlayTrigger, Button} from "react-bootstrap";
-import info from "./images/info-24.png"
+import info from "../images/info-24.png"
 
 function MoreInfo() {
 
@@ -18,7 +18,7 @@ function MoreInfo() {
 
     return (
         <OverlayTrigger trigger="click" rootClose placement="left" overlay={popover}>
-        <Button variant="dark"><img src={info} alt="my image"/></Button>        
+        <Button variant="dark"><img src={info} alt="my"/></Button>        
         </OverlayTrigger>
     );
 }

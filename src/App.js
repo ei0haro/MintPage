@@ -47,11 +47,7 @@ function App() {
 
             <NavBar walletAddress={ownerAddress} handleConnectWallet={handleConnectWallet} isConnected={isConnected}></NavBar>
 
-            {isConnected ? <Navbar bg="dark" variant="dark" >
-                    <Container className="justify-content-center">
-                    </Container>
-                </Navbar>
-                : ""}
+   
 
             <Main/>
                       

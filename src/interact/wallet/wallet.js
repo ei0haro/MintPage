@@ -39,7 +39,7 @@ export const getNumberOfMintedNfts = async () => {
 
   export const getMintPrice = async () => {
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
-    return await window.contract.methods.mintPrice().call()
+    return await window.contract.methods.getMintPrice().call()
   }
  
 

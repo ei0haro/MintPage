@@ -5,8 +5,6 @@ import {connectWallet} from "./interact/wallet/wallet";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./NavBar";
 import Main from "./Main";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
 
 function App() {
     
@@ -49,7 +47,7 @@ function App() {
 
    
 
-            <Main/>
+            <Main connectedAdress={ownerAddress}/>
                       
         </div>
 

@@ -111,12 +111,90 @@
   },
   {
     "inputs": [],
+    "name": "FREESUPPLY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "LASTCALLMINTPRICE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "LASTCALLSUPPLYLIMIT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAXSUPPLY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MINTPRICE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "OPERATOR_FILTER_REGISTRY",
     "outputs": [
       {
         "internalType": "contract IOperatorFilterRegistry",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TEXTCHARACTERLIMIT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -280,17 +358,27 @@
       },
       {
         "internalType": "string",
-        "name": "punkColor",
+        "name": "pepeColor",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "punkBlinkTime",
+        "name": "eyeColor",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "eyeBlinkTime",
         "type": "string"
       },
       {
         "internalType": "string",
         "name": "textBlinkTime",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "mouthColor",
         "type": "string"
       }
     ],
@@ -341,19 +429,6 @@
   },
   {
     "inputs": [],
-    "name": "mintPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "name",
     "outputs": [
       {
@@ -392,19 +467,6 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "paused",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -524,44 +586,28 @@
       },
       {
         "internalType": "string",
-        "name": "_punkColor",
+        "name": "_pepeColor",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_eyeColor",
         "type": "string"
       },
       {
         "internalType": "string",
         "name": "_textColor",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_mouthColor",
+        "type": "string"
       }
     ],
     "name": "setCustomColor",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "setMintPrice",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stringLimit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -649,29 +695,6 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_userText1",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_userText2",
-        "type": "string"
-      }
-    ],
-    "name": "updateMetadataSpeechText",
-    "outputs": [],
-    "stateMutability": "payable",
     "type": "function"
   },
   {

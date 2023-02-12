@@ -124,7 +124,7 @@ function Home(){
             <div className='homeGrid'>
                     <div>
                         <Image width={700} height={700}  fluid alt='...' src={pepe} />
-                        <p className='mintedText'>Total minted: {nrOfMintedNfts}</p>
+                        <p className='mintedText'>Total minted: {nrOfMintedNfts} / 999</p>
                     </div>
                     <div>
                     <Card style={{ width: '15rem' }} bg="black">

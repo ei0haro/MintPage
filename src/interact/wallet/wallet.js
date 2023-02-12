@@ -40,8 +40,34 @@ export const getNumberOfMintedNfts = async () => {
   export const getMintPrice = async () => {
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
     return await window.contract.methods.getMintPrice().call()
+  } 
+
+  export const updateColor = async (tokenId, pepeColor, eyeColor, textColor, mouthColor, setTxHash, setIsLoading) => {
+    
+    window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
+    
+    try{
+      await window.contract.methods.setCustomColor(tokenId, pepeColor, eyeColor, textColor, mouthColor).call()
+      .then((txHash) => {
+            
+        setIsLoading(true);
+
+        const interval = setInterval(function() {
+          
+          web3.eth.getTransactionReceipt(txHash.hash, function(err, rec) {
+            if (rec) {
+              setIsLoading(false);
+              setTxHash(txHash.hash);
+              clearInterval(interval);
+            }
+          });
+        }, 1000);
+      })
   }
- 
+  catch (error) {
+    return 'Something went wrong' + error;
+  }
+  }
 
   export const checkAvailability = async (text1, text2) => {
 

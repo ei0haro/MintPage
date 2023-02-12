@@ -14,10 +14,15 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
     function handleInputChange1(e) {
         let text = e.target.value
 
-        if(text.endsWith(' ') || text.startsWith(' ')){
+        if(text.endsWith(' ') || text.startsWith(' ') ){
             setValidated(true);
             setIsValidText1(false);
             setInputErrorMessage("Cannot start or end with white space");
+        }
+        else if(text.includes('\'') || text.includes('\"')){
+            setValidated(true);
+            setIsValidText1(false);
+            setInputErrorMessage("Cannot contain quote");
         }
         else{
             setIsValidText1(true);
@@ -35,6 +40,11 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
             setValidated(true);
             setIsValidText2(false);
             setInputErrorMessage("Cannot start or end with white space");
+        }
+        else if(text.includes('\'') || text.includes('\"')){
+            setValidated(true);
+            setIsValidText1(false);
+            setInputErrorMessage("Cannot contain quote");
         }
         else{
             setIsValidText2(true);

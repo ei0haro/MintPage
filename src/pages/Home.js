@@ -96,6 +96,10 @@ function Home(){
             setIsValidText1(false);
             setInputErrorMessage("Text starts or ends with space");
         }
+        else if (textInput1.includes('\'') || textInput1.includes('\"')) {
+            setIsValidText1(false);
+            setInputErrorMessage("Text contain quote");
+        }        
         else {
             text1Good = true;
             setIsValidText1(true);
@@ -103,6 +107,10 @@ function Home(){
         if (textInput2 !== "" && (textInput2.endsWith(' ') || textInput2.startsWith(' '))) {
             setIsValidText2(false);
             setInputErrorMessage("Text starts or ends with space");
+        }
+        else if (textInput2.includes('\'') || textInput2.includes('\"')) {
+            setIsValidText2(false);
+            setInputErrorMessage("Text contain quote");
         }
         else {
             text2Good = true;

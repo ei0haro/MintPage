@@ -1,11 +1,12 @@
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import DarkButton from "../interact/button/button";
 import {Form} from "react-bootstrap";
 import "./UpdateColor.css";
 import {ownerOf, updateColor} from "../interact/wallet/wallet";
 import {Alert} from "react-bootstrap";
 import MoreInfoColorChange from "./MoreInfoColorChange";
+import { ChromePicker } from 'react-color';
 
 function UpdateColor({connectedAdress}) {
 
@@ -19,6 +20,14 @@ function UpdateColor({connectedAdress}) {
   const [tokenId, setTokenId] = useState("");
   const [txHash, setTxHash] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+
+  const [sketchPickerColor, setSketchPickerColor] = useState({
+    r: "241",
+    g: "112",
+    b: "19",
+    a: "1",
+  });
 
   function isValidColor(str) {
     return /^[0-9A-F]{6}$/i.test(str);
@@ -115,7 +124,7 @@ const handleUpdateColor = () => {
     return (
         <div>
       <div className="colorGrid">                        
-      <Form variant="dark">
+        <Form variant="dark">
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"  variant="dark">
                   <Form.Label></Form.Label>
                   <Form.Control
@@ -184,11 +193,17 @@ const handleUpdateColor = () => {
                   />
                   <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
               </Form.Group>
-          <div className='color-buttons'>
-              <DarkButton size={'lm'} onClickFunction={handleUpdateColor} disableIf={isLoading} text={isLoading ? 'Updating…' : `Update Color`}></DarkButton>
-                <MoreInfoColorChange></MoreInfoColorChange>
-          </div>
+            <div className='color-buttons'>
+                <DarkButton size={'lm'} onClickFunction={handleUpdateColor} disableIf={isLoading} text={isLoading ? 'Updating…' : `Update Color`}></DarkButton>
+                  <MoreInfoColorChange></MoreInfoColorChange>
+            </div>
           </Form>
+          <ChromePicker
+          onChange={(color) => {
+            setSketchPickerColor(color.rgb);
+          }}
+          color={sketchPickerColor}
+        />
 
         </div>
             {txHash !== "" &&  <Alert variant='dark' onClose={() => setTxHash("")} dismissible>
@@ -199,3 +214,4 @@ const handleUpdateColor = () => {
 }
 
 export default UpdateColor;
+

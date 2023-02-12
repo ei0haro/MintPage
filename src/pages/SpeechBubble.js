@@ -88,7 +88,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                 <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Check availability'}></DarkButton>
                                 <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Minting…' : `Mint (${ethers.utils.formatEther(mintPrice)} ETH)`}></DarkButton>
                                 <MoreInfo></MoreInfo>
-                                <Link disableIf={isLoading}  to="/updatecolor">
+                                <Link to="/updatecolor">
                                     <DarkButton size={'lm'} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Update color'}></DarkButton>
                                 </Link>
                                 </div>

@@ -40,15 +40,32 @@ export const getNumberOfMintedNfts = async () => {
   export const getMintPrice = async () => {
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
     return await window.contract.methods.getMintPrice().call()
-  } 
+  }
 
-  export const updateColor = async (tokenId, pepeColor, eyeColor, textColor, mouthColor, setTxHash, setIsLoading) => {
-    
+export const ownerOf = async (tokenId) => {
     window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
-    
-    try{
-      await window.contract.methods.setCustomColor(tokenId, pepeColor, eyeColor, textColor, mouthColor).call()
-      .then((txHash) => {
+    try {
+        return await window.contract.methods.ownerOf(tokenId).call()
+    }
+    catch (e){
+        return "Invalid token id"
+    }
+}
+  export const updateColor = async (tokenId, pepeColor, eyeColor, textColor, mouthColor, setTxHash, setIsLoading) => {
+
+      window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
+
+      try{
+          const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+          provider.getSigner().sendTransaction({
+              value: 0,
+              to: process.env.REACT_APP_NFT_CONTRACT, // Required except during contract publications.
+              from: window.ethereum.selectedAddress, // must match user's active address.
+              data: window.contract.methods
+                  .setCustomColor(tokenId, pepeColor, eyeColor, textColor, mouthColor)
+                  .encodeABI(),
+          }).then((txHash) => {
             
         setIsLoading(true);
 

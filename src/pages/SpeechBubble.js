@@ -54,10 +54,6 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
 
         setTextInput2(text);
     }
-
-//<input placeholder="Text1" variant="dark" maxlength="10" type="text" id="pepe-text-input" class="form-control form-control-sm">
-//<input placeholder="Text2" variant="dark" maxlength="10" type="text" id="exampleForm.ControlInput1" class="form-control form-control-sm">
-
     return (
         <div className="box">                        
                         <Form variant="dark">
@@ -92,7 +88,7 @@ function SpeechBubble({validated, setValidated, isValidText1, setIsValidText1, i
                                 <DarkButton size={'lm'} onClickFunction={handleCheckAvailability} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Check availability'}></DarkButton>
                                 <DarkButton size={'lm'} onClickFunction={handleMint} disableIf={isLoading} text={isLoading ? 'Minting…' : `Mint (${ethers.utils.formatEther(mintPrice)} ETH)`}></DarkButton>
                                 <MoreInfo></MoreInfo>
-                                <Link to="/updatecolor">
+                                <Link disableIf={isLoading}  to="/updatecolor">
                                     <DarkButton size={'lm'} disableIf={isLoading} text={isLoading ? 'Minting…' : 'Update color'}></DarkButton>
                                 </Link>
                                 </div>

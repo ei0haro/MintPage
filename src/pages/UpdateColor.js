@@ -1,13 +1,13 @@
 
 import React, {useEffect, useState} from "react";
-import {Popover, OverlayTrigger, Button} from "react-bootstrap";
-import info from "../images/info-24.png"
 import DarkButton from "../interact/button/button";
 import {Form} from "react-bootstrap";
 import "./UpdateColor.css";
-import {updateColor} from "../interact/wallet/wallet";
+import {ownerOf, updateColor} from "../interact/wallet/wallet";
+import {Alert} from "react-bootstrap";
+import MoreInfoColorChange from "./MoreInfoColorChange";
 
-function UpdateColor() {
+function UpdateColor({connectedAdress}) {
 
   const [validated, setValidated] = useState(false);
   const [isValidHexColor, setIsValidHexColor] = useState(false);
@@ -28,11 +28,12 @@ function UpdateColor() {
     let text = e.target.value
 
     if(e.target.name === 'TokenId'){
+
       setTokenId(text);
       return;
     }
 
-    if(text.length == 0){
+    if(text.length === 0){
       setValidated(true);
       setIsValidHexColor(true);
     }
@@ -62,13 +63,57 @@ function UpdateColor() {
 
 
 const handleUpdateColor = () => {
-  
-      console.log("called update color")
-        updateColor(tokenId, headColor, eyeColor, textColor, mouthColor, setTxHash, setIsLoading)      
+
+      if(headColor.length > 0 && !isValidColor(headColor)){
+          setValidated(true);
+          setIsValidHexColor(false);
+          setInputErrorMessage(`Must set valid 6 character hex color for Head`);
+      }
+      else if(mouthColor.length > 0 && !isValidColor(mouthColor)){
+          setValidated(true);
+          setIsValidHexColor(false);
+          setInputErrorMessage(`Must set valid 6 character hex color for Mouth`);
+      }
+      else if(eyeColor.length > 0 && !isValidColor(eyeColor)){
+          setValidated(true);
+          setIsValidHexColor(false);
+          setInputErrorMessage(`Must set valid 6 character hex color for Eyes`);
+      }
+      else if(textColor.length > 0 && !isValidColor(textColor)){
+          setValidated(true);
+          setIsValidHexColor(false);
+          setInputErrorMessage(`Must set valid 6 character hex color for text`);
+      }
+      else{
+          ownerOf(tokenId).then((owner) => {
+              if(connectedAdress === ""){
+                  setValidated(true);
+                  setIsValidHexColor(false);
+                  setInputErrorMessage(`Please connect wallet`);
+              }
+                  else if(owner.toLowerCase() === connectedAdress.toLowerCase()){
+
+                      updateColor(tokenId, headColor, eyeColor, textColor, mouthColor, setTxHash, setIsLoading)
+                          .then()
+                  }
+                  else if(owner === "Invalid token id"){
+                      setValidated(true);
+                      setIsValidHexColor(false);
+                      setInputErrorMessage(`No Pepe with token id ${tokenId}`);
+                  }
+                  else {
+                      setValidated(true);
+                      setIsValidHexColor(false);
+                      setInputErrorMessage(`You are not owner of Token Id ${tokenId}`);
+                  }
+              }
+          )
+      }
 };
 
 
     return (
+        <div>
       <div className="colorGrid">                        
       <Form variant="dark">
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"  variant="dark">
@@ -77,7 +122,8 @@ const handleUpdateColor = () => {
                       name="TokenId"
                       size="sm"    
                       variant="dark"                            
-                      placeholder="Token Id"                    
+                      placeholder="Token Id"
+                      onChange={handleInputChange}
                       maxLength={3}  
                       type="text"
                       onKeyPress={(event) => {
@@ -138,10 +184,17 @@ const handleUpdateColor = () => {
                   />
                   <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
               </Form.Group>
+          <div className='color-buttons'>
               <DarkButton size={'lm'} onClickFunction={handleUpdateColor} disableIf={isLoading} text={isLoading ? 'Updating…' : `Update Color`}></DarkButton>
+                <MoreInfoColorChange></MoreInfoColorChange>
+          </div>
           </Form>
 
-</div>
+        </div>
+            {txHash !== "" &&  <Alert variant='dark' onClose={() => setTxHash("")} dismissible>
+                Color Updated - txHash: <a href={'https://etherscan.io/tx/' + txHash} >{txHash}</a>
+            </Alert>}
+        </div>
     );
 }
 

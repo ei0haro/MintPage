@@ -49,7 +49,7 @@ function App() {
 
    
 
-            <Main/>
+            <Main connectedAdress={ownerAddress}/>
                       
         </div>
 

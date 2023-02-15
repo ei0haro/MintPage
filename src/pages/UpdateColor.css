@@ -8,6 +8,12 @@
   background-color: #212529;
 }
 
+
+.invalid-feedback {
+  display: block;
+}
+
+
 .form-control {
 
   border-radius: 0;
@@ -22,7 +28,28 @@
   margin: 0 auto;
   grid-column-gap: 50px;
   padding-top: 30px;
+  align-items: end;
+}
 
+.update-buttons
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+  grid-column-gap: 50px;
+  padding-top: 30px;
+  align-items: end;
+}
+
+.colorbutton{
+  width: 100px;
+
+}
+
+label{
+  color: #f3f3f3;
+  font-size: large;
+  font-weight: bold;
 }
 
 .colorGrid

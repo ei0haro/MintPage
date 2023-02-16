@@ -32,7 +32,7 @@ function NavBar({walletAddress, handleConnectWallet, isConnected}) {
                         {' '}
                     <a href={"https://twitter.com/OnChainPepe"}><Image width={30} height={30} thumbnail={true} src={twitterImage}></Image></a>
                     {' '}
-                    <a id="navbarText" href={"/"}>On Chain Talking Pepe</a>
+                    <a id="navbarText" className={"linkcolor"} href={"/"}>On Chain Talking Pepe</a>
                     {' '}
                         
                     </Navbar.Brand>                    

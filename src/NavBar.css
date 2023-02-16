@@ -8,6 +8,6 @@ a:hover { text-decoration: none; }
 
 a:active { text-decoration: none; }
 
-a {
+.linkcolor {
     color: rgb(224, 224, 224);
   }

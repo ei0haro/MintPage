@@ -6,6 +6,8 @@ import "./UpdateColor.css";
 import {ownerOf, updateColor, getMetadata} from "../interact/wallet/wallet";
 import {Alert} from "react-bootstrap";
 import MoreInfoColorChange from "./MoreInfoColorChange";
+import Image from "react-bootstrap/Image";
+import TextBubbleSvg from "./TextBubbleSvg"
 
 function UpdateColor({connectedAdress}) {
 
@@ -19,7 +21,7 @@ function UpdateColor({connectedAdress}) {
   const [tokenId, setTokenId] = useState("");
   const [txHash, setTxHash] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [pepeSvg, setPepeSvg] = useState("");
 
     useEffect(() => {
         if(connectedAdress !== ""){
@@ -40,18 +42,23 @@ function UpdateColor({connectedAdress}) {
       return;
     }
 
-    if(e.target.name === 'Head'){
-      setHeadColor(text.replace('#', ''));
+    let hexColor = text.replace('#', '')
 
+    if(e.target.name === 'Head'){
+      setHeadColor(hexColor);
+      setPepeSvg(pepeSvg.replace(/(?<=fill=\"#)(.*)(?=\" d=\"M497)/, hexColor));
     }
     else if(e.target.name === 'Eye'){
-      setEyeColor(text.replace('#', ''));
+      setEyeColor(hexColor);
+      setPepeSvg(pepeSvg.replace(/(?<=repeatCount=\"indefinite\" values=\"#000;#)(.*)(?=;#000\"\/>)/, hexColor))
     }
     else if(e.target.name === 'Mouth'){
-      setMouthColor(text.replace('#', ''));
+      setMouthColor(hexColor);
+      setPepeSvg(pepeSvg.replace(/(?<=id=\"C\" fill=\"#)(.*)(?=\" d=\"M419)/, hexColor))
     }
     else if(e.target.name === 'Text'){
-      setTextColor(text.replace('#', ''));
+      setTextColor(hexColor);
+      setPepeSvg(pepeSvg.replace(/(?<=attributeName="fill" values="#000;#)(.*)(?=;#000;#000)/, hexColor));
     }
 
 }
@@ -70,11 +77,18 @@ const handleGetMetaData = () => {
                     setIsValidHexColor(false);
                 } else {
                     let base64Metadata = m.replace("data:application/json;base64,", "");
-                    let decodedData = JSON.parse(Buffer.from(base64Metadata, 'base64').toString('utf8'))
+                    let decodedData = JSON.parse(Buffer.from(base64Metadata, 'base64').toString('utf8'));
+                    let svg = Buffer.from(decodedData.image.replace("data:image/svg+xml;base64,", ""), 'base64').toString('utf8');
+
+                    svg  = svg.replace(/(?<=.E{fill:none})(.*)(?=F{stroke:#000})/, ".L{stroke:#fff}.")
+                    svg  = svg.replace(/(?<=108z\" class=)(.*)(?=E\"\/>)/, "\"L ")
+                    setPepeSvg(svg);
+
                     setHeadColor(decodedData.attributes.filter(item => item.trait_type === 'Head color')[0].value.replace('#', ''))
                     setTextColor(decodedData.attributes.filter(item => item.trait_type === 'Text color')[0].value.replace('#', ''))
                     setMouthColor(decodedData.attributes.filter(item => item.trait_type === 'Mouth color')[0].value.replace('#', ''))
                     setEyeColor(decodedData.attributes.filter(item => item.trait_type === 'Eye color')[0].value.replace('#', ''))
+
                 }
             })
         }
@@ -135,10 +149,11 @@ const handleUpdateColor = () => {
       }
 };
 
-
     return (
         <div>
-      <div className="colorGrid">                        
+      <div className="colorGrid">
+          {pepeSvg !== "" ? <Image width={700} height={700}  src={`data:image/svg+xml;utf8,${encodeURIComponent(pepeSvg)}`} /> : <div style={{width: 700, height: 700}}><TextBubbleSvg text1={"Please fetch"} text2={"metadata"}></TextBubbleSvg></div> }
+
         <Form variant="dark">
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"  variant="dark">
                   <div className="color-buttons">
@@ -161,7 +176,7 @@ const handleUpdateColor = () => {
                       />
                   </div>
                   <div className="color-buttons">
-                      <Form.Label color="white">Head</Form.Label>
+                      <Form.Label color="white">Head color</Form.Label>
                       <Form.Control
                           name="Head"
                           size="sm"
@@ -176,7 +191,7 @@ const handleUpdateColor = () => {
                       />
                   </div>
                   <div className="color-buttons">
-                      <Form.Label>Eyes</Form.Label>
+                      <Form.Label>Eyes color</Form.Label>
                       <Form.Control
                           name="Eye"
                           size="sm"
@@ -190,7 +205,7 @@ const handleUpdateColor = () => {
                       />
                   </div>
                   <div className="color-buttons">
-                      <Form.Label>Text</Form.Label>
+                      <Form.Label>Text color</Form.Label>
                       <Form.Control
                           name="Text"
                           size="sm"
@@ -204,7 +219,7 @@ const handleUpdateColor = () => {
                       />
                   </div>
                   <div className="color-buttons">
-                      <Form.Label>Mouth</Form.Label>
+                      <Form.Label>Mouth color</Form.Label>
                       <Form.Control
                           name="Mouth"
                           size="sm"
@@ -219,8 +234,8 @@ const handleUpdateColor = () => {
                   <Form.Control.Feedback type="invalid">{inputErrorMessage}</Form.Control.Feedback>
               </Form.Group>
             <div className='update-buttons'>
-                <DarkButton size={'lm'} onClickFunction={handleUpdateColor} disableIf={isLoading} text={isLoading ? 'Updating… ' : `Update Color`}></DarkButton>
-                <DarkButton size={'lm'} onClickFunction={handleGetMetaData} disableIf={isLoading} text={isLoading ? 'Updating… ' : `Fetch Metadata`}></DarkButton>
+                <DarkButton size={'sm'} onClickFunction={handleGetMetaData} disableIf={isLoading} text={isLoading ? 'Updating… ' : `Fetch Metadata`}></DarkButton>
+                <DarkButton size={'sm'} onClickFunction={handleUpdateColor} disableIf={isLoading} text={isLoading ? 'Updating… ' : `Update Color`}></DarkButton>
                 <MoreInfoColorChange></MoreInfoColorChange>
             </div>
           </Form>

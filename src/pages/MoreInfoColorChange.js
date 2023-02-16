@@ -19,7 +19,7 @@ function MoreInfoColorChange() {
 
     return (
         <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
-        <Button variant="dark"><img src={info} alt="my"/></Button>        
+        <Button size={'lg'} variant="dark"><img src={info} alt="my"/></Button>
         </OverlayTrigger>
     );
 }

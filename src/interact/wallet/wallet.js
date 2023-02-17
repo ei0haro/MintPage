@@ -33,8 +33,13 @@ export const connectWallet = async () => {
 };
 
 export const getMetadata = async (tokenId) => {
-    window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
-    return await window.contract.methods.tokenURI(tokenId).call()
+    try {
+        window.contract = await new web3.eth.Contract(contractABI, process.env.REACT_APP_NFT_CONTRACT);
+        return await window.contract.methods.tokenURI(tokenId).call()
+    }
+    catch (e){
+        return "Invalid token id"
+    }
 }
 
 export const getNumberOfMintedNfts = async () => {

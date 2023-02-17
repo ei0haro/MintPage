@@ -71,7 +71,7 @@ const handleGetMetaData = () => {
         }
         try {
             getMetadata(tokenId).then((m) => {
-                if (m.includes("URI query for nonexistent")) {
+                if (m.includes("Invalid token id")) {
                     setInputErrorMessage(`No Pepe with token id ${tokenId}`);
                     setValidated(true);
                     setIsValidHexColor(false);

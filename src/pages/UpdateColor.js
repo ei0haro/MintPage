@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import DarkButton from "../interact/button/button";
 import {Form} from "react-bootstrap";
 import "./UpdateColor.css";
-import {ownerOf, updateColor, getMetadata} from "../interact/wallet/wallet";
+import {ownerOf, updateColor} from "../interact/wallet/wallet";
 import {Alert} from "react-bootstrap";
 import MoreInfoColorChange from "./MoreInfoColorChange";
 import Image from "react-bootstrap/Image";
@@ -70,7 +70,7 @@ const handleGetMetaData = () => {
             setIsValidHexColor(false);
         }
         try {
-            getMetadata(tokenId).then((m) => {
+            updateColor(tokenId).then((m) => {
                 if (m.includes("URI query for nonexistent")) {
                     setInputErrorMessage(`No Pepe with token id ${tokenId}`);
                     setValidated(true);

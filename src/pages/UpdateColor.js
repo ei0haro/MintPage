@@ -46,19 +46,19 @@ function UpdateColor({connectedAdress}) {
 
     if(e.target.name === 'Head'){
       setHeadColor(hexColor);
-      setPepeSvg(pepeSvg.replace(/(?<=fill=\"#)(.*)(?=\" d=\"M497)/, hexColor));
+      setPepeSvg(pepeSvg.replace(/(.*fill\=\"#)(.*)(\" d\=\"M497.*)/, `$1${hexColor}$3`));
     }
     else if(e.target.name === 'Eye'){
       setEyeColor(hexColor);
-      setPepeSvg(pepeSvg.replace(/(?<=repeatCount=\"indefinite\" values=\"#000;#)(.*)(?=;#000\"\/>)/, hexColor))
+      setPepeSvg(pepeSvg.replace(/(.*repeatCount=\"indefinite\" values=\"#000;#)(.*)(;#000\"\/>.*)/, `$1${hexColor}$3`))
     }
     else if(e.target.name === 'Mouth'){
       setMouthColor(hexColor);
-      setPepeSvg(pepeSvg.replace(/(?<=id=\"C\" fill=\"#)(.*)(?=\" d=\"M419)/, hexColor))
+      setPepeSvg(pepeSvg.replace(/(.*id=\"C\" fill=\"#)(.*)(\" d=\"M419.*)/, `$1${hexColor}$3`))
     }
     else if(e.target.name === 'Text'){
       setTextColor(hexColor);
-      setPepeSvg(pepeSvg.replace(/(?<=attributeName="fill" values="#000;#)(.*)(?=;#000;#000)/, hexColor));
+      setPepeSvg(pepeSvg.replace(/(.*attributeName="fill" values="#000;#)(.*)(;#000;#000.*)/, `$1${hexColor}$3`));
     }
 
 }
@@ -80,8 +80,8 @@ const handleGetMetaData = () => {
                     let decodedData = JSON.parse(Buffer.from(base64Metadata, 'base64').toString('utf8'));
                     let svg = Buffer.from(decodedData.image.replace("data:image/svg+xml;base64,", ""), 'base64').toString('utf8');
 
-                    svg  = svg.replace(/(?<=.E{fill:none})(.*)(?=F{stroke:#000})/, ".L{stroke:#fff}.")
-                    svg  = svg.replace(/(?<=108z\" class=)(.*)(?=E\"\/>)/, "\"L ")
+                    svg  = svg.replace(/(.*.E{fill:none})(.*)(F{stroke:#000}.*)/, `$1.L{stroke:#fff}.$3`)
+                    svg  = svg.replace(/(.*108z\" class=)(.*)(E\"\/>.*)/, `$1\"L $3`)
                     setPepeSvg(svg);
 
                     setHeadColor(decodedData.attributes.filter(item => item.trait_type === 'Head color')[0].value.replace('#', ''))
